@@ -15,7 +15,9 @@ public class ContactData {
         this.iD = iD;
         this.contactDTO = contactDTO;
     }
-
+    /**
+    * Getters and Setters
+    */
     public int getiD() {
         return iD;
     }
@@ -30,7 +32,5 @@ public class ContactData {
 
     public void setContactDTO(ContactDTO contactDTO) {
         this.contactDTO = contactDTO;
-    }
-
-    
+    }  
 }
