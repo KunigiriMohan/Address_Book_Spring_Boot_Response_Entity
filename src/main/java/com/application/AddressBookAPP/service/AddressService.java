@@ -13,14 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddressService implements AddressBookInterface{
 
+    List<ContactData> contactDatas = new ArrayList<>();
     /**
      * method to Show all Contact Details in AddressBook
      * @return : Entered Contact Data
      */
     @Override
     public List<ContactData> getContactData() {
-        List<ContactData> contactDatas = new ArrayList<>();
-        contactDatas.add(new ContactData(1,new ContactDTO("mohan","5/223","Hyderabad","Andhra Pradesh","518301","85550585852","kmohanr5@gmail.com")));
         return contactDatas;
     }
 
@@ -31,8 +30,6 @@ public class AddressService implements AddressBookInterface{
      */
     @Override
     public ContactData getContactDataById(int contactID) {
-        List<ContactData> contactDatas = new ArrayList<>();
-        contactDatas.add(new ContactData(contactID,new ContactDTO("mohan","5/223","Hyderabad","Andhra Pradesh","518301","85550585852","kmohanr5@gmail.com")));
         return contactDatas.get(contactID);
     }
 
@@ -43,7 +40,8 @@ public class AddressService implements AddressBookInterface{
      */
     @Override
     public ContactData createContactData(ContactDTO contactDTO) {
-        ContactData contactData = new ContactData(1, contactDTO);
+        ContactData contactData = new ContactData(contactDatas.size()+1, contactDTO);
+        contactDatas.add(contactData);
         return contactData;
     }
 
@@ -54,7 +52,8 @@ public class AddressService implements AddressBookInterface{
      */
     @Override
     public ContactData updateContactData(int contactID,ContactDTO contactDTO) {
-        ContactData contactData = new ContactData(contactID, contactDTO);
+        ContactData contactData = new ContactData(contactDatas.size()+1, contactDTO);
+        contactDatas.set(contactID,contactData);
         return contactData;
     }
 
@@ -64,6 +63,7 @@ public class AddressService implements AddressBookInterface{
      */
     @Override
     public void deleteContactData(int contactID) {
+        contactDatas.remove(contactID);
     }
     
 }
