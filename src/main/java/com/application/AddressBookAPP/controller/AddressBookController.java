@@ -1,6 +1,8 @@
 package com.application.AddressBookAPP.controller;
 
-import com.application.AddressBookAPP.model.Contact;
+import com.application.AddressBookAPP.dto.ContactDTO;
+import com.application.AddressBookAPP.dto.ResponseDTO;
+import com.application.AddressBookAPP.model.ContactData;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +31,13 @@ public class AddressBookController {
     
     /**
      * API for getting all Contacts
-     * @return : ResonseEntity of Contact
+     * @return : ResponseEntity of Contact
      */
     @GetMapping("/get")
-    public ResponseEntity<String> getContactDetails(){
-        return new ResponseEntity<String>("Get Call Success ",HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> getContactDetails(){
+        ContactData contactData = new ContactData(1,new ContactDTO("mohan","5/223","Hyderabad","Andhra Pradesh","518301","85550585852","kmohanr5@gmail.com"));
+        ResponseDTO responseDTO = new ResponseDTO("Get Call Success : ", contactData);
+        return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
     }
 
     /**
@@ -42,38 +46,45 @@ public class AddressBookController {
      * @return ResponseEntity of Contact Details of given ID
      */
     @GetMapping("/get/{contactID}")
-    public ResponseEntity<String> getContactByID(@PathVariable("contactID") int contactID){
-        return new ResponseEntity<String>("Get Call Success for Id : " +contactID,HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> getContactByID(@PathVariable("contactID") int contactID){
+        ContactData contactData = new ContactData(contactID,new ContactDTO("mohan","5/223","Hyderabad","Andhra Pradesh","518301","85550585852","kmohanr5@gmail.com"));
+        ResponseDTO responseDTO = new ResponseDTO("Get Call Success : ", contactData);
+        return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
         
     }
 
     /**
      * API for updating Contact using Response Entity
-     * @param contact
+     * @param contactDTO
      * @return : ResponseEntity of Contact data
      */
     @PostMapping("/create")
-    public ResponseEntity<String> addingContact(@RequestBody Contact contact){
-        return new ResponseEntity<String>("Created Created data for " +contact,HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> addingContact(@RequestBody ContactDTO contactDTO){
+        ContactData contactData = new ContactData(1, contactDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Create Call Success : ", contactData);
+        return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
     }
 
     /**
      * API for Updating Details of Contact
-     * @param contact
+     * @param contactDTO
      * @return : ResponseEntity of Updated Contact
      */
     @PutMapping("/update")
-    public ResponseEntity<String> updateContact(@RequestBody Contact contact){
-        return new ResponseEntity<String>("Updated Contact Data for : "+contact,HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> updateContact(@RequestBody ContactDTO contactDTO){
+        ContactData contactData = new ContactData(1, contactDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Create Call Success : ", contactData);
+        return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
     }
 
     /**
      * API for Deleteing Contact by ID
-     * @param contact
+     * @param contactID
      * @return :message showing delete ID
      */
     @DeleteMapping("/delete/{contactID}")
-    public ResponseEntity<String> deleteContactByID(@PathVariable("contactID") int contactID){
-        return new ResponseEntity<String>("Delete Call Success for ID : "+contactID,HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> deleteContactByID(@PathVariable("contactID") int contactID){
+        ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully :  ","Deleted Id"+contactID);
+        return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
     }
 }
