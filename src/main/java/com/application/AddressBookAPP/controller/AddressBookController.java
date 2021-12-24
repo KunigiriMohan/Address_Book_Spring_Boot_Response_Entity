@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @RestController : Defining Class as a RestController
+ * @RequestMapping : Defining path of URL
+ * @PostMapping : Defining URL path of API and to perform POST operation
+ * @GetMapping : Defining URL Path of API
+ * @PutMapping : Defining URL Path of API which perform PUT operation
+ * @DeleteMapping : Defining URL Path of API which perform DELETE opertion
+ * @Autowired : Dependency Injection
+ */
+
 @RestController
 @RequestMapping("/addressbook")
 public class AddressBookController {
